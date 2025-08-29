@@ -1,4 +1,3 @@
-
 import os
 import requests
 import time
@@ -39,7 +38,13 @@ class BookingViewSet(viewsets.ModelViewSet):
         return Booking.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        booking = serializer.save(user=self.request.user)
+        # Send booking confirmation email asynchronously
+        from .tasks import send_booking_confirmation_email
+        subject = 'Booking Confirmation'
+        message = f'Thank you for your booking, {self.request.user.username}! Your booking ID is {booking.id}.'
+        to_email = self.request.user.email
+        send_booking_confirmation_email.delay(to_email, subject, message)
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
