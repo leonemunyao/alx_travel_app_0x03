@@ -37,8 +37,10 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'e470260d4759.ngrok-free.app',  # My current ngrok URL
+    ''
 ]
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Application definition
 
@@ -65,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'alx_travel_app.urls'
