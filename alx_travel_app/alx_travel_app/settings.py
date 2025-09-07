@@ -37,7 +37,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'e470260d4759.ngrok-free.app',  # My current ngrok URL
-    ''
+    'https://alx-travel-app-0x03-j617.onrender.com'
 ]
 
 
